@@ -1,0 +1,35 @@
+﻿<div class="dashboard game-connected">
+    <div class="rows">
+        <div class="steer">
+            <div class="game-steer-position" id="game-steer-position">⬆</div>
+            <div class="user-steer-position" id="user-steer-position">🎮</div>
+        </div>
+        <div class="pedal">
+            <div class="throttle-background">
+                <div class="throttle-foreground" id="inverse-throttle"></div>
+                <div class="speed">
+                    <span class="truck-cruiseControlOn">▶</span>
+                    <span class="truck-speedRounded"></span>kmh
+                     <span style="color:red;">⚠</span><span class="navigation-speedLimit"></span>kmh
+                </div>
+            </div>
+            <div class="brake-background">
+                <div class="brake-foreground" id="inverse-brake"></div>
+                <div class="fuel">
+                    <span class="fuel-mark">⛽</span>
+                    <span class="truck-fuel"></span>L
+                    (<span class="truck-fuelAverageConsumption"></span>L/km)
+                </div>
+            </div>
+        </div>
+        <div class="nav-info">
+            <div class="sleeptime"><span id="bed-mark">🛏</span><span class="game-nextRestStopTimeString"></span></div>
+            <div class="estimatetime"><span id="est-clock-mark">⏲</span><span class="navigation-estimatedTimeString"></span></div>
+            <div class="job">
+                <div class="trailer-attached">
+                    🚛→<span class="job-destinationCity"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

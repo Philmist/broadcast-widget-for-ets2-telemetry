@@ -1,0 +1,16 @@
+{
+    "comments": [
+        "=== USAGE ===",
+        "Add this skin's url (open with your browser and copy url)",
+        "to OBS browser source."
+    ],
+
+    "config": {
+        "name": "broadcast_widget_thin",
+        "title": "HTML widget for OBS and something",
+        "author": "Philmist",        
+        "width": 0,
+        "height": 0
+    }    
+
+}
