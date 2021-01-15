@@ -28,6 +28,9 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     return data;
 };
 
+let estDanger = false;
+let bedDanger = 0;
+
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     let steerPositionPercentage = (data.truck.gameSteer + 1.0) * 50.0;
     let steerUserPositionPercentage = (data.truck.userSteer + 1.0) * 50.0;
@@ -42,25 +45,37 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     let estClockMark = document.getElementById("est-clock-mark");
 
     if ((data.job.destinationCity && data.job.destinationCity !== "") && (remainingTimeDate.getTime() < estTimeDate.getTime())) {
-        if (!estClockMark.classList.contains("danger")) {
+        if (!estDanger) {
             estClockMark.classList.add("danger");
+            estDanger = true;
         }
     } else {
-        estClockMark.classList.remove("danger");
+        if (estDanger) {
+            estClockMark.classList.remove("danger");
+            estDanger = false;
+        }
     }
 
     if (nextRestStopTimeDate.getUTCHours() == 0) {
-        bedMark.classList.remove("caution");
-        if (!bedMark.classList.contains("danger")) {
+        if (bedDanger !== 2) {
+            if (bedDanger == 1) {
+                bedMark.classList.remove("caution");
+            }
             bedMark.classList.add("danger");
+            bedDanger = 2;
         }
     } else if (estTimeDate.getTime() > nextRestStopTimeDate.getTime()) {
-        if ((!bedMark.classList.contains("caution")) && (!bedMark.classList.contains("danger"))) {
+        if (bedDanger == 0) {
+            bedDanger = 1;
             bedMark.classList.add("caution");
         }
     } else {
-        bedMark.classList.remove("caution");
-        bedMark.classList.remove("danger");
+        if (bedDanger == 2) {
+            bedMark.classList.remove("danger");
+        } else if (bedDanger == 1) {
+            bedMark.classList.remove("caution");
+        }
+        bedDanger = 0;
     }
 
     document.getElementById("game-steer-position").style.right = `${steerPositionPercentage}%`;
