@@ -34,8 +34,10 @@ let bedDanger = 0;
 Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     let steerPositionPercentage = (data.truck.gameSteer + 1.0) * 50.0;
     let steerUserPositionPercentage = (data.truck.userSteer + 1.0) * 50.0;
-    let gameThrottleInversePercentage = 100.0 - data.truck.gameThrottle * 100.0;
-    let gameBrakeInversePercentage = 100.0 - data.truck.gameBrake * 100.0;
+    let gameThrottlePercentage = data.truck.gameThrottle * 100.0;
+    let gameBrakePercentage = data.truck.gameBrake * 100.0;
+    let gameThrottleInversePercentage = 100.0 - gameThrottlePercentage;
+    let gameBrakeInversePercentage = 100.0 - gameBrakePercentage;
 
     let estTimeDate = new Date(data.navigation.estimatedTime);
     let remainingTimeDate = new Date(data.job.remainingTime);
@@ -80,6 +82,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
 
     document.getElementById("game-steer-position").style.right = `${steerPositionPercentage}%`;
     document.getElementById("user-steer-position").style.right = `${steerUserPositionPercentage}%`;
-    document.getElementById("inverse-throttle").style.width = `${gameThrottleInversePercentage}%`;
-    document.getElementById("inverse-brake").style.width = `${gameBrakeInversePercentage}%`;
+    document.getElementById("throttle").style.width = `${gameThrottlePercentage}%`;
+    document.getElementById("brake").style.width = `${gameBrakePercentage}%`;
 }
